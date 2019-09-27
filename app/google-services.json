@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "853048838752",
+    "firebase_url": "https://nerlyserver.firebaseio.com",
+    "project_id": "nerlyserver",
+    "storage_bucket": "nerlyserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853048838752:android:2f9159bc363244d853d105",
+        "android_client_info": {
+          "package_name": "com.example.nerly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853048838752-ubr7om0qlu7st9f2kinbc9fjqf1q406l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDedujXbFsDb8N4E1PUaSS4mMXg8mX0Clg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853048838752-ubr7om0qlu7st9f2kinbc9fjqf1q406l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
