@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(MainActivity.this, TastyList.class);
-//                startActivity(intent);
+                Intent intent=new Intent(MainActivity.this, TastyList.class);
+                startActivity(intent);
             }
         });
 
@@ -77,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(MainActivity.this, TastyList.class);
-//                startActivity(intent);
+                Intent intent=new Intent(MainActivity.this, TastyList.class);
+                startActivity(intent);
             }
         });
 
@@ -86,6 +88,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         callArt();
         callWedding();
         callDog();
+
+        MainItem a = new MainItem("친환경유기농 무역박람회 2019", R.drawable.organic);
+        itemList.add(a);
+
+        MainItem b = new MainItem("한국국제사인디자인전", R.drawable.ink);
+        itemList.add(b);
+
+        MainItem e = new MainItem("서울 펫쇼", R.drawable.welsh);
+        itemList.add(e);
+
+        MainItem c = new MainItem("허니문 박람회", R.drawable.honeymoon);
+        itemList.add(c);
+
+        MainItem d = new MainItem("서울웨딩페어", R.drawable.bouquet);
+        itemList.add(d);
 
         // picked Item
         recyclerView = findViewById(R.id.idRecyclerViewHorizontalList);
@@ -100,40 +117,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 for(DataSnapshot messageData : dataSnapshot.getChildren()){
                     JSONObject jsonObject = new JSONObject((Map) messageData.getValue());
                     try {
-                        JSONObject dataObject1 = (JSONObject) jsonObject.get("booth1");
-                        name1 = (String) dataObject1.get("name");
-                        MainItem a = new MainItem(name1, R.drawable.organic);
-                        itemList.add(a);
+                        Iterator i = jsonObject.keys();
+                        int tempIndex = 0;
+                        while(i.hasNext()){
+                            if(tempIndex == 1){
 
-                        JSONObject dataObject2 = (JSONObject) jsonObject.get("booth2");
-                        name2 = (String) dataObject2.get("name");
-                        MainItem b = new MainItem(name2, R.drawable.artfair);
-                        itemList.add(b);
-
-                        JSONObject dataObject3 = (JSONObject) jsonObject.get("booth3");
-                        name3 = (String) dataObject3.get("name");
-                        MainItem c = new MainItem(name3, R.drawable.honeymoon);
-                        itemList.add(c);
-
-                        JSONObject dataObject4 = (JSONObject) jsonObject.get("booth4");
-                        name4 = (String) dataObject4.get("name");
-                        MainItem d = new MainItem(name4, R.drawable.welsh);
-                        itemList.add(d);
-
-                        JSONObject dataObject5 = (JSONObject) jsonObject.get("booth5");
-                        name5 = (String) dataObject5.get("name");
-                        MainItem e = new MainItem(name5, R.drawable.coffee);
-                        itemList.add(e);
-
-                        JSONObject dataObject6 = (JSONObject) jsonObject.get("booth6");
-                        name6 = (String) dataObject6.get("name");
-                        MainItem f = new MainItem(name6, R.drawable.baguette);
-                        itemList.add(f);
-
-                        JSONObject dataObject7 = (JSONObject) jsonObject.get("booth7");
-                        name7 = (String) dataObject7.get("name");
-                        MainItem g = new MainItem(name7, R.drawable.baguette);
-                        itemList.add(g);
+                            }
+                            String booth = i.next().toString();
+                            String resName = "coffee";
+                            String packName = "com.example.nerly"; // 패키지명
+                            int resID = getResources().getIdentifier(resName, "drawable", packName);
+                            JSONObject dataObject1 = (JSONObject) jsonObject.get(booth);
+                            name1 = (String) dataObject1.get("name");
+                            MainItem z = new MainItem(name1, resID);
+                            itemList.add(z);
+                            tempIndex += 1;
+                        }
                     }catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -164,11 +163,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
         }
         return true;
-    }
-
-    private void pickedItemList(){
-        // 찜한 박람회 쓰기
-
     }
 
     class FragmentAdapter extends FragmentPagerAdapter {

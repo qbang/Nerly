@@ -15,10 +15,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Shopping extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -53,18 +57,27 @@ public class Shopping extends AppCompatActivity implements BottomNavigationView.
             }
         });
 
-        shoppingAdpater.addItem("달꽃", "박하차", "3000원", ContextCompat.getDrawable(Shopping.this, R.drawable.backha_tea));
-        shoppingAdpater.addItem("달꽃", "전통차", "3500원", ContextCompat.getDrawable(Shopping.this, R.drawable.basic_tea));
-        shoppingAdpater.addItem("달꽃", "해바라기차", "2800원", ContextCompat.getDrawable(Shopping.this, R.drawable.sunflower_tea));
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot messageData : dataSnapshot.getChildren()){
                     JSONObject jsonObject = new JSONObject((Map) messageData.getValue());
-                    System.out.println(jsonObject);
+
                     try {
-                        JSONObject dataObject1 = (JSONObject) jsonObject.get("달꽃");
+                        Iterator i = jsonObject.keys();
+                        while(i.hasNext()){
+                            String booth = i.next().toString();
+                            JSONObject dataObject = (JSONObject) jsonObject.get(booth);
+                            JSONArray  items = (JSONArray) dataObject.get("item");
+                            JSONArray  prices = (JSONArray) dataObject.get("price");
+                            for(int index = 0 ; index < items.length();index++){
+                                String boothName = booth;
+                                String itemName = (String) items.get(index);
+                                String itempPrice = (String) prices.get(index);
+                                shoppingAdpater.addItem(boothName,itemName,itempPrice,ContextCompat.getDrawable(Shopping.this, R.drawable.flower_tea));
+                            }
+
+                        }
 
                     }catch(JSONException e) {
                         e.printStackTrace();

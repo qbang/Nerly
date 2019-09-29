@@ -66,7 +66,7 @@
                         android:id="@+id/textView28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="잎사귀를 터치해서 박람회를 "
+                        android:text="잎사귀를 터치해서 전시회를 "
                         android:textSize="16sp"
                         android:textStyle="bold" />
 

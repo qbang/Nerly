@@ -111,6 +111,46 @@ public class TastyList extends AppCompatActivity implements BottomNavigationView
             }
         });
 
+        title2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TastyList.this, TastyBooth.class);
+                startActivity(intent);
+            }
+        });
+
+        title3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TastyList.this, TastyBooth.class);
+                startActivity(intent);
+            }
+        });
+
+        title4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TastyList.this, TastyBooth.class);
+                startActivity(intent);
+            }
+        });
+
+        title5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TastyList.this, TastyBooth.class);
+                startActivity(intent);
+            }
+        });
+
+        title6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TastyList.this, TastyBooth.class);
+                startActivity(intent);
+            }
+        });
+
         floatingActionButton = (FloatingActionButton) findViewById(R.id.home);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

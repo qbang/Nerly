@@ -17,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.Map;
 
 public class Reservation extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -24,7 +26,7 @@ public class Reservation extends AppCompatActivity implements BottomNavigationVi
     private ReservationAdpater reservationAdpater;
     private ImageView back;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("nerly/shopping");
+    private DatabaseReference databaseReference = firebaseDatabase.getReference("nerly/reservation");
     private String boothLocation, title, waitNum, waitTime;
 
     @Override
@@ -51,22 +53,17 @@ public class Reservation extends AppCompatActivity implements BottomNavigationVi
             }
         });
 
-        reservationAdpater.addItem("달꽃","A001","004번", "15분", ContextCompat.getDrawable(Reservation.this, R.drawable.close));
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot messageData : dataSnapshot.getChildren()){
                     JSONObject jsonObject = new JSONObject((Map) messageData.getValue());
                     try {
-                        // 부스 목록과 일치하는게 있으면 가져오게 하고싶다!!!!!!
-                        JSONObject dataObject1 = (JSONObject) jsonObject.get("달꽃");
-                        boothLocation = (String) dataObject1.get("boothLocation");
-                        title = (String) dataObject1.get("title");
-                        waitNum = (String) dataObject1.get("waitNum");
-                        waitTime = (String) dataObject1.get("waitTime");
-
-
+                        boothLocation = (String) jsonObject.get("boothLocation");
+                        title = (String) jsonObject.get("title");
+                        waitNum = (String) jsonObject.get("waitNum");
+                        waitTime = (String) jsonObject.get("waitTime");
+                        reservationAdpater.addItem(title,boothLocation,waitNum, waitTime, ContextCompat.getDrawable(Reservation.this, R.drawable.close));
                     }catch(JSONException e) {
                         e.printStackTrace();
                     }
