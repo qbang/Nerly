@@ -25,3 +25,6 @@ Nerly
 ![슬라이드8](https://user-images.githubusercontent.com/41017076/65789718-ebde3e00-e198-11e9-9cd9-7e74c9ad7fb9.PNG)
 ![슬라이드9](https://user-images.githubusercontent.com/41017076/65789719-ec76d480-e198-11e9-90fc-755e2a4153b2.PNG)
 ##### 예약 페이지에서 예약한 부스를 확인할 수 있으며, 장바구니 페이지에서 담아놓은 상품을 확인할 수 있습니다.  
+  
+
+> Bottom Navigation 참고자료: https://github.com/IslamBesto/CustomBottoBar 
